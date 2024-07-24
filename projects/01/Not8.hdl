@@ -1,0 +1,13 @@
+
+/**
+test
+ */
+
+CHIP Not8 {
+    IN in[8];
+    OUT out[8];
+
+    PARTS:
+     Not4(in[0..1] = false, in[2..3] = in[2..3], out = out[0..3]);
+     Not4(in[0..1] = false, in[2..3] = in[6..7], out = out[4..7]);
+}
