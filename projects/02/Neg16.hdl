@@ -1,0 +1,17 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/Inc16.hdl
+
+/**
+ * 16-bit Eq tester
+ * MY
+ */
+
+CHIP Neg16 {
+    IN in[16];
+    OUT out;
+
+    PARTS:
+      Mux(a = false, b = true, sel = in[15], out = out);
+}

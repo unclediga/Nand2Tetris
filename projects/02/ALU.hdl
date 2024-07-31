@@ -75,4 +75,13 @@ CHIP ALU {
         Mux16(a = out1, b = outng, sel = no, out = out2);
         Mux16(a = out1, b = outng, sel = no, out = out);
 
+        //zr; 1 if (out == 0), 0 otherwise
+        Or16Way(in = out2, out = zr); 
+
+       // ng; 1 if (out < 0),  0 otherwise
+        Neg16(in = out2, out = ng); 
+
+
+
+
 }
