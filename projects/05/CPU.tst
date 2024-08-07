@@ -1,13 +1,18 @@
 // This file is part of www.nand2tetris.org
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
-// File name: projects/05/CPU.tst
+// File name: projects/5/CPU.tst
+
+// Tests the CPU by setting the instruction input to various binary values that
+// code Hack instructions, and outputting the values of the registers that are
+// supposed to be affected by the instructions.
 
 load CPU.hdl,
 output-file CPU.out,
 compare-to CPU.cmp,
-output-list time%S0.4.0 inM%D0.6.0 instruction%B0.16.0 reset%B2.1.2 outM%D1.6.0 writeM%B3.1.3 addressM%D0.5.0 pc%D0.5.0 DRegister[]%D1.6.1;
-
+// Tracks the time, the CPU inputs (inM, instruction, reset bit), the CPU
+// outputs (outM, writeM bit, address, pc), and the value of the D-register.
+output-list time%S1.3.1 inM%D0.6.0 instruction%B0.16.0 reset%B2.1.2 outM%D1.6.0 writeM%B3.1.2 addressM%D1.5.1 pc%D0.5.0 DRegister[]%D1.7.1;
 
 set instruction %B0011000000111001, // @12345
 tick, output, tock, output;
