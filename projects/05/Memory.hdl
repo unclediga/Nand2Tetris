@@ -25,5 +25,34 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-	//// Replace this comment with your code.
+      And(a = address[14],b = address[13], out = loadkbd);
+
+//    IN  in, sel[2];  00 = ram, 01 = scr, 10 = scr, 11 = kbd
+//    OUT a, b, c, d;
+      DMux4Way(in = true, sel = address[13..14], a = ram, b = b1, c = c1, d = kbd );
+      Or(a = b1, b = c1, out = scr);
+       
+// IN  in[16], load, address[14];
+// OUT out[16];
+      And(a = ram, b = load, out = loadram);
+      RAM16K(in = in , load = loadram, address = address[0..14], out = outram);
+
+//CHIP Screen {
+//    IN  in[16],    // what to write
+//    load,          // write-enable bit
+//    address[13];   // where to read/write
+//   OUT out[16];   // Screen value at the given address
+
+      And(a = scr, b = load, out = loadscr);
+ 	  Screen(in = in, load = loadscr, address = address[0..13], out = outscr);
+
+//CHIP Keyboard {
+//    OUT out[16];
+      Keyboard(out = outkbd);
+// CHIP Mux16 {
+//    IN  a[16], b[16], sel;
+//    OUT out[16];
+
+      Mux4Way16(a = outram, b = outscr, c = outscr, d = outkbd, sel = address[13..14], out = out );
+
 }

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project source="2.7.1" version="1.0">
-  This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
-
-  <lib desc="#Wiring" name="0"/>
+This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
+<lib desc="#Wiring" name="0"/>
   <lib desc="#Gates" name="1"/>
   <lib desc="#Plexers" name="2"/>
   <lib desc="#Arithmetic" name="3"/>
   <lib desc="#Memory" name="4">
+    <tool name="Register">
+      <a name="labelfont" val="SansSerif bold 16"/>
+    </tool>
+    <tool name="Counter">
+      <a name="width" val="16"/>
+      <a name="max" val="0xffff"/>
+      <a name="label" val="PC"/>
+      <a name="labelfont" val="SansSerif bold 16"/>
+    </tool>
     <tool name="ROM">
       <a name="addrWidth" val="16"/>
       <a name="contents">addr/data: 16 8
@@ -73,29 +81,40 @@
       <circ-port height="8" pin="100,380" width="8" x="46" y="76"/>
       <circ-anchor facing="east" height="6" width="6" x="47" y="47"/>
     </appear>
-    <comp lib="0" loc="(100,380)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="reset"/>
-    </comp>
+    <wire from="(80,470)" to="(110,470)"/>
+    <wire from="(200,110)" to="(200,120)"/>
+    <wire from="(180,170)" to="(180,210)"/>
+    <wire from="(190,140)" to="(240,140)"/>
+    <wire from="(160,170)" to="(180,170)"/>
+    <wire from="(170,370)" to="(250,370)"/>
+    <wire from="(180,170)" to="(190,170)"/>
+    <wire from="(270,130)" to="(370,130)"/>
+    <wire from="(110,300)" to="(150,300)"/>
+    <wire from="(160,110)" to="(200,110)"/>
+    <wire from="(200,120)" to="(240,120)"/>
+    <wire from="(110,210)" to="(180,210)"/>
+    <wire from="(110,210)" to="(110,300)"/>
+    <wire from="(380,150)" to="(380,180)"/>
+    <wire from="(190,140)" to="(190,170)"/>
+    <wire from="(250,150)" to="(250,370)"/>
     <comp lib="0" loc="(160,170)" name="Pin">
       <a name="width" val="16"/>
       <a name="tristate" val="false"/>
       <a name="label" val="instruction"/>
     </comp>
-    <comp lib="0" loc="(720,160)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="writeM"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="0" loc="(710,100)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
+    <comp lib="0" loc="(160,110)" name="Pin">
       <a name="width" val="16"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="outM"/>
-      <a name="labelloc" val="east"/>
+      <a name="label" val="inM"/>
+    </comp>
+    <comp lib="4" loc="(470,470)" name="Counter">
+      <a name="width" val="16"/>
+      <a name="max" val="0xffff"/>
+      <a name="label" val="PC"/>
+      <a name="labelfont" val="SansSerif bold 16"/>
+    </comp>
+    <comp lib="2" loc="(480,280)" name="Multiplexer">
+      <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(710,300)" name="Pin">
       <a name="facing" val="west"/>
@@ -105,10 +124,39 @@
       <a name="label" val="addressM"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="0" loc="(160,110)" name="Pin">
+    <comp lib="0" loc="(150,300)" name="Splitter">
+      <a name="fanout" val="16"/>
+      <a name="incoming" val="16"/>
+      <a name="appear" val="center"/>
+    </comp>
+    <comp lib="4" loc="(400,130)" name="Register">
+      <a name="width" val="16"/>
+      <a name="label" val="A"/>
+      <a name="labelfont" val="Lucida Console bold 16"/>
+    </comp>
+    <comp lib="2" loc="(270,130)" name="Multiplexer">
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="4" loc="(520,120)" name="Register">
+      <a name="width" val="16"/>
+      <a name="label" val="D"/>
+      <a name="labelfont" val="SansSerif bold 16"/>
+    </comp>
+    <comp lib="0" loc="(80,470)" name="Clock"/>
+    <comp lib="0" loc="(710,100)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
       <a name="width" val="16"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="inM"/>
+      <a name="label" val="outM"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(110,470)" name="Tunnel">
+      <a name="label" val="TICK"/>
+    </comp>
+    <comp lib="0" loc="(380,180)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="TACK"/>
     </comp>
     <comp lib="0" loc="(710,360)" name="Pin">
       <a name="facing" val="west"/>
@@ -116,6 +164,17 @@
       <a name="width" val="15"/>
       <a name="tristate" val="false"/>
       <a name="label" val="pc"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(100,380)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="reset"/>
+    </comp>
+    <comp lib="0" loc="(720,160)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="writeM"/>
       <a name="labelloc" val="east"/>
     </comp>
   </circuit>
