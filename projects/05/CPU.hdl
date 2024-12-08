@@ -32,5 +32,41 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-	
+            
+      And(a = instruction[3], b = instruction[15], out = writeM);
+      And(a = instruction[4], b = instruction[15], out = WD);
+      Not(in = instruction[15], out = nbit1);
+      Or(a = instruction[5], b = nbit1, out = WA);
+
+      Jmp(ltz = instruction[2], eqz = instruction[1] , gtz = instruction[0] , ng = ngAlu, zr = zrAlu, bit1 = instruction[15], out = WPC );
+
+      Mux16(a = instruction, b = outAlu, sel = instruction[15], out = inA);
+
+      //     IN  in[16], load; OUT out[16];
+      ARegister(in = inA, load = WA, out[0..14] = addressM, out = pcIn, out = outA);
+
+      Mux16(a = outA, b = inM, sel = instruction[12], out = inY);
+
+      DRegister(in = outAlu, load = WD, out = inX);
+
+
+      // CHIP PC {  IN  in[16], load, inc, reset;  OUT out[16];
+
+      PC(in = outA, load = WPC, inc = true, reset = reset, out[0..14] = pc, out[15] = false);
+      
+     // CHIP ALU {  IN x[16], y[16], zx,nx, zy, ny, f, no;  OUT  out[16], zr, ng;
+
+      ALU(x = inX, y = inY, zx = instruction[11],nx = instruction[10],
+                            zy = instruction[9],ny = instruction[8],
+                            f = instruction[7], no = instruction[6],
+           out = outM, out = outAlu, zr = zrAlu, ng = ngAlu);
+
+
+      // CHIP Jmp {     IN ltz, eqz, gtz, ng, zr, bit1;     OUT wpc;
+     
+
+
+
+
+
 }
