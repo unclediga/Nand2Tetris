@@ -7,25 +7,17 @@ CHIP Jmp {
 
     PARTS:
 
-      Not(in = eqz, out = neqz);
-      Not(in = gtz, out = ngtz);
-      Not(in = ng, out = nng);
       Not(in = zr, out = nzr);
-      And(a = neqz, b = ngtz, out = o1);
-      And(a = gtz, b = nng, out = o2);
-      And(a = ltz, b = ng, out = o3);
-      And(a = o1, b = ng, out = o4);
-      And(a = o2, b = nzr, out = o5);
-      And(a = eqz, b = zr, out = o6);
-      And(a = o3,  b = nzr, out = o7); 
+      Not(in = ng, out = nng);
+      And(a = gtz, b = eqz, out = o1);
+      And(a = ltz, b = nzr, out = o2);
+      And(a = gtz, b = nzr, out = o3);
+      And(a = o1, b = ltz, out = o4);
+      And(a = eqz, b = zr, out = o5);
+      And(a = o2, b = ng, out = o6);
+      And(a = o3,  b = nng, out = o7); 
       Or(a = o4,  b = o5, out = o8); 
       Or(a = o6,  b = o7, out = o9); 
       Or(a = o8,  b = o9, out = o10); 
-      And(a = bit1, b = o10, out = o11);
-      And(a = ng, b = zr, out = zrng);
-      And(a = eqz, b = gtz, out = eg);
-      And(a = eg, b = ltz, out = egl);
-      Mux(a = o11, b = false, sel = zrng, out = o12);
-      Mux(a = o12, b = true, sel = egl, out = out);
-
+      And(a = bit1, b = o10, out = out);
 }
