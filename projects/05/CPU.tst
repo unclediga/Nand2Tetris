@@ -9,10 +9,10 @@
 
 load CPU.hdl,
 output-file CPU.out,
-//compare-to CPU.cmp,
+compare-to CPU.cmp,
 // Tracks the time, the CPU inputs (inM, instruction, reset bit), the CPU
 // outputs (outM, writeM bit, address, pc), and the value of the D-register.
-output-list time%S1.3.1 inM%D0.6.0 instruction%B0.16.0 reset%B2.1.2 outM%D1.6.0 writeM%B3.1.2 addressM%D1.5.1 pc%D0.5.0 WPC%D1.1.1 DRegister[]%D1.7.1;
+output-list time%S1.3.1 inM%D0.6.0 instruction%B0.16.0 reset%B2.1.2 outM%D1.6.0 writeM%B3.1.2 addressM%D1.5.1 pc%D0.5.0 DRegister[]%D1.7.1;
 
 set instruction %B0011000000111001, // @12345
 tick, output, tock, output;

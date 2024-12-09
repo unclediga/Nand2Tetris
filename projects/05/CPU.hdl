@@ -38,7 +38,6 @@ CHIP CPU {
       Not(in = instruction[15], out = nbit1);
       Or(a = instruction[5], b = nbit1, out = WA);
 
-      Jmp(ltz = instruction[2], eqz = instruction[1] , gtz = instruction[0] , ng = ngAlu, zr = zrAlu, bit1 = instruction[15], out = WPC );
 
       Mux16(a = instruction, b = outAlu, sel = instruction[15], out = inA);
 
@@ -50,9 +49,6 @@ CHIP CPU {
       DRegister(in = outAlu, load = WD, out = inX);
 
 
-      // CHIP PC {  IN  in[16], load, inc, reset;  OUT out[16];
-
-      PC(in = outA, load = WPC, inc = true, reset = reset, out[0..14] = pc, out[15] = false);
       
      // CHIP ALU {  IN x[16], y[16], zx,nx, zy, ny, f, no;  OUT  out[16], zr, ng;
 
@@ -62,7 +58,13 @@ CHIP CPU {
            out = outM, out = outAlu, zr = zrAlu, ng = ngAlu);
 
 
+
       // CHIP Jmp {     IN ltz, eqz, gtz, ng, zr, bit1;     OUT wpc;
+      Jmp(ltz = instruction[2], eqz = instruction[1] , gtz = instruction[0] , ng = ngAlu, zr = zrAlu, bit1 = instruction[15], out = WPC );
+
+      // CHIP PC {  IN  in[16], load, inc, reset;  OUT out[16];
+
+      PC(in = outA, load = WPC, inc = true, reset = reset, out[0..14] = pc, out[15] = false);
      
 
 

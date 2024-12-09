@@ -21,6 +21,11 @@ CHIP Jmp {
       Or(a = o4,  b = o5, out = o8); 
       Or(a = o6,  b = o7, out = o9); 
       Or(a = o8,  b = o9, out = o10); 
-      And(a = bit1, b = o10, out = out);
+      And(a = bit1, b = o10, out = o11);
+      And(a = ng, b = zr, out = zrng);
+      And(a = eqz, b = gtz, out = eg);
+      And(a = eg, b = ltz, out = egl);
+      Mux(a = o11, b = false, sel = zrng, out = o12);
+      Mux(a = o12, b = true, sel = egl, out = out);
 
 }
