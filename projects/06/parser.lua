@@ -10,14 +10,16 @@ p = {
   
 hasMoreLines = function () 
   --[[  Булево значение   (boolean) Есть ли еще строки на входе? ]]
-  
-  while true do
+   while true do
     curline = lines() 
     if curline == nil then
         return false
-    if curline:match(''
-    
-  return 
+    end    
+    if curline:match('') then
+      return false
+    end
+  end  
+  
 end,
 
 
@@ -33,6 +35,7 @@ setSource = function (fn)
   lines = fn
 
 end
+
 }
 
 --[[ Возвращает тип текущей команды: 
@@ -51,27 +54,15 @@ function p.jump()  end
 Следует вызывать, только если instructionType равен C_INSTRUCTION  ]]
 function p.comp()  end  
 
---[[
-Возвращает символическую
-часть dest текущей С-команды
-(8 вариантов). Следует вызывать,
-только если instructionType
-равен C_INSTRUCTION
-]]
+--[[ Возвращает символическую часть dest текущей С-команды (8 вариантов). 
+Следует вызывать, только если instructionType равен C_INSTRUCTION ]]
 function p.dest()  end  
 
 --[[
-Если текущая команда (xxx), воз-
-вращает символ xxx. Если текущая
-команда @xxx, возвращает сим-
-вол или десятичное значение xxx
-(в виде строки).
-Следует вызывать, только если
-instructionType
-равен A_INSTRUCTION или
-L_INSTRUCTION
+Если текущая команда (xxx), возвращает символ xxx. 
+Если текущая команда @xxx, возвращает символ или десятичное значение xxx (в виде строки).
+Следует вызывать, только если instructionType равен A_INSTRUCTION или L_INSTRUCTION
 ]]
 function p.symbol()  end  
-
 
 return p
