@@ -1,4 +1,4 @@
-local  lines = nil
+local lines   = nil
 local curline = nil
 
 p = {
